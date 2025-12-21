@@ -8,9 +8,13 @@ from sklearn.model_selection import train_test_split
 from tkinter import *
 window = Tk()
 window.title("House-price")
-window.minsize(500,500)
-window.maxsize(700,700)
+window.geometry("1300x400")
 label = Label(window, text="House-price",background="gray",foreground="black",font=("Tahoma",20)).pack()
+Button = Button(window,text = "Predict",padx=15,pady=15)
+Button.place(x=600,y=300)
+window.mainloop()
+
+
 # df.shape()
 # df.head()
 # df.describe()
