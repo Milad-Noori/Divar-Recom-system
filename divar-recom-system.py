@@ -34,6 +34,8 @@ def get_state3():
         print("Yes")
     else:
         print("No")
+
+
 window.geometry("800x600")
 
 Address = Label(window,text="Address :",padx=10,pady=10)
@@ -72,8 +74,6 @@ checkbutton1 =Checkbutton(window,text="Warehouse",variable=were_var,onvalue=1, o
 checkbutton1.place(x=200,y=420)
 
 
-# Elevator= Label(window,text="Elevator :",padx=10,pady=10)
-# Elevator.place(x=350,y=365)
 elev_var = IntVar()
 checkbutton3 = Checkbutton(window,text="Elevator",variable=elev_var,onvalue=1, offvalue=0,command=get_state3)
 checkbutton3.place(x=300,y=420)
