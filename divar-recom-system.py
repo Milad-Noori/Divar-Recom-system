@@ -1,16 +1,34 @@
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from PIL.Image import preinit
-from fontTools.cffLib.specializer import commandsToProgram
-from sklearn import metrics
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error
-from sklearn.model_selection import train_test_split
 from tkinter import *
+import tkinter as tk
+from tkinter import ttk
 def print_predict():
-    print("model_predicte")
-    greting_label.configure(text="predicted✅")
+    try:
+        area = float(area_entry.get())
+        floor = int(floor_entry.get())
+        room = int(room_entry.get())
+        year = int(yearof_construction_entry.get())
+
+        parking = parking_var.get()
+        warehouse = were_var.get()
+        elevator = elev_var.get()
+
+        address = address_entry.get()
+
+        predicted_price = predict_priced(
+            area, floor, room, year,
+            parking, warehouse, elevator,
+            address
+        )
+
+        greting_label.configure(
+            text=f"💰 Predicted Price: {predicted_price:,} Toman",
+            fg="green"
+        )
+
+    except Exception as e:
+        greting_label.configure(text="❌ Input error", fg="red")
+        print(e)
+
 
 window = Tk()
 window.title("House-price")
@@ -38,8 +56,12 @@ def get_state3():
 
 window.geometry("800x600")
 
-Address = Label(window,text="Address :",padx=10,pady=10)
-Address.place(x=50,y=50)
+Address =Address_label = Label(window, text="Address :")
+Address_label.place(x=50, y=60)
+address_options = ["Pounak", "Saadat Abad", "Gisha", "Tehranpars"]
+address_entry = ttk.Combobox(window, values=address_options, width=37)
+address_entry.place(x=200, y=60, height=26)
+address_entry.current(0)
 
 Area = Label(window,text = "Area :",padx=15,pady=15)
 Area.place(x=50,y=100)
@@ -85,30 +107,4 @@ Button = Button(window,text = "textPredict",padx=20,pady=10,bd=5,command=print_p
 Button.place(x=50,y=500)
 greting_label= Label(window,text="",padx=10,pady=10)
 greting_label.place(x=50,y=550)
-window.mainloop()
-
-
-# df.shape()
-# df.head()
-# df.describe()
-# df.isnull().sum()
-# data = pd.read_csv("HouseNew.csv")
-# df1 = pd.DataFrame(data)
-# df1.isnull().sum()
-# print(df1)
-# # X=pd.DataFrame(df1,columns=['Elevator','Floor','Parking','Room',
-# #                             'Warehouse','YearOfConstruction',
-# #                             'Address'])
-# Y=df1['Price'].values.reshape(-1,1)
-# X_train,X_test , Y_train,Y_test = train_test_split(X,Y ,test_size = 0.2, random_state = 0)
-# lr=LinearRegression()
-# lr.fit(Y_test,Y_train)
-# y_pred =lr.predict(X_test)
-# print("mae",metrics.mean_absolute_error(Y_test,y_pred))
-# print("mae",mean_absolute_error(Y_test,y_pred))
-# print(np.sqrt(metrics.mean_absolute_error(Y_test,y_pred)))
-# print(y_pred)
-
-
-
 window.mainloop()
