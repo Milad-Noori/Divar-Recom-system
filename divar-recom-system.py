@@ -2,13 +2,16 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from PIL.Image import preinit
+from fontTools.cffLib.specializer import commandsToProgram
 from sklearn import metrics
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
 from tkinter import *
-# def print_predict():
-#
+def print_predict():
+    print("model_predicte")
+    greting_label.configure(text="predicted✅")
+
 window = Tk()
 window.title("House-price")
 window.geometry("800x600")
@@ -20,6 +23,7 @@ Area = Label(window,text = "Area :",padx=15,pady=15)
 Area.place(x=50,y=100)
 area_entry=Entry(window)
 area_entry.place(x=200,y=115,width=250,height=25)
+
 
 Floor = Label(window,text = "Floor :",padx=15,pady=15)
 Floor.place(x=50,y=150)
@@ -49,8 +53,10 @@ Elevator.place(x=350,y=365)
 price= Label(window,text = "🏷️Price :",padx=15,pady=15,font=("Arial",20))
 price.place(x=350,y=500)
 
-Button = Button(window,text = "textPredict",padx=20,pady=10,bd=10)
+Button = Button(window,text = "textPredict",padx=20,pady=10,bd=5,command=print_predict)
 Button.place(x=50,y=500)
+greting_label= Label(window,text="",padx=10,pady=10)
+greting_label.place(x=50,y=550)
 window.mainloop()
 
 
