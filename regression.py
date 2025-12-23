@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn import metrics
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 import joblib
 from sklearn.preprocessing import StandardScaler
@@ -54,15 +54,27 @@ ss = StandardScaler()
 X_rescale = ss.fit_transform(X)
 print(X_rescale)
 
-X_train , X_test , Y_train , Y_test = train_test_split(X_rescale,Y , test_size=0.2 , random_state=0)
+X_train , X_test , Y_train , Y_test = train_test_split(X_rescale,Y , test_size=0.2 , random_state=0,shuffle=True)
 
 lr =LinearRegression()
 lr.fit(X_train,Y_train)
 y_pred=lr.predict(X_test)
 
+from sklearn import metrics
 
-joblib.dump(lr, "model.pkl")
-joblib.dump(ss, "scaler.pkl")
-joblib.dump("model.pkl")
+MAE = mean_squared_error(Y_test,y_pred)
+MSE = mean_squared_error(Y_test,y_pred)
+RMSE = np.sqrt(MSE)
+R2S = r2_score(Y_test,y_pred)
+
+print(MAE)
+print(MSE)
+print(RMSE)
+print(r2_score)
+
+
+# joblib.dump(lr, "model.pkl")
+# joblib.dump(ss, "scaler.pkl")
+# joblib.dump("model.pkl")
 
 print("Model and scaler saved successfully")
