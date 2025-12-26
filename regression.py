@@ -7,6 +7,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 import joblib
 from sklearn.preprocessing import StandardScaler
+import seaborn as sns
 
 data = pd.read_csv('HouseNew.csv')
 import pandas as pd
@@ -44,7 +45,8 @@ df1["Address_Encode"] = le.fit_transform(df1["Address"])
 print(df1.columns)
 print(df1.head(10).to_string())
 
-
+sns.heatmap(df1['Elevator','Floor','Area','Parking','Room','Warehouse','YearOfConstruction','Address_Encode'],)
+plt.show()
 
 # x = df1.drop(["Price"], axis=1)
 X = df1[['Elevator','Floor','Area','Parking','Room','Warehouse','YearOfConstruction','Address_Encode']]
@@ -67,14 +69,14 @@ MSE = mean_squared_error(Y_test,y_pred)
 RMSE = np.sqrt(MSE)
 R2S = r2_score(Y_test,y_pred)
 
-print(MAE)
-print(MSE)
-print(RMSE)
-print(r2_score)
+# print(MAE)
+# print(MSE)
+# print(RMSE)
+# print(r2_score)
 
 
 # joblib.dump(lr, "model.pkl")
 # joblib.dump(ss, "scaler.pkl")
 # joblib.dump("model.pkl")
 
-print("Model and scaler saved successfully")
+# print("Model and scaler saved successfully")
