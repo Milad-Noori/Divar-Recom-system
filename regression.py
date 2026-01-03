@@ -24,7 +24,7 @@ address_encoder.fit(df["Address"])  # فقط روی داده واقعی آموز
 
 # ذخیره encoder برای استفاده بعدی
 joblib.dump(address_encoder, "address_encoder.pkl")
-df1=pd.DataFrame(data)
+df1=pd.DataFrame(df)
 # print(df1.isnull().sum())
 
 df1["Elevator"] =df1["Elevator"].astype(int)
@@ -38,6 +38,8 @@ df1["Address"] = df1["Address"].fillna("نامشخص")
 address_counts = df1["Address"].value_counts()
 df1["AddressFrequency"] = df1["Address"].map(address_counts)
 
+df1['Floor']=df1['Floor'].value_counts()
+df1['Floor']=df1['Floor'].fillna(df1['Floor'].mode()[0].astype(int))
 # print(df1["Address"].unique())
 # print(df1.head(10).to_string())
 from sklearn.preprocessing import LabelEncoder,StandardScaler
@@ -59,6 +61,10 @@ IQR=q3-q1
 lower_bound=q1-1.5*IQR
 upper_bound=q3+1.5*IQR
 
+df1=df1[(df1['Price']>=lower_bound ) & (df1['Price']<= upper_bound)]
+sns.boxplot(data=df1,x='Price')
+plt.show()
+print(df1.dtypes)
 
 # x = df1.drop(["Price"], axis=1)
 X = df1[['Elevator','Floor','Area','Parking','Room','Warehouse','YearOfConstruction','Address_Encode']]
