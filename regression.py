@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from numpy.ma.extras import corrcoef
 from sklearn import metrics
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
@@ -24,7 +25,7 @@ address_encoder.fit(df["Address"])  # فقط روی داده واقعی آموز
 # ذخیره encoder برای استفاده بعدی
 joblib.dump(address_encoder, "address_encoder.pkl")
 df1=pd.DataFrame(data)
-print(df1.isnull().sum())
+# print(df1.isnull().sum())
 
 df1["Elevator"] =df1["Elevator"].astype(int)
 df1["Parking"] =df1["Parking"].astype(int)
@@ -37,24 +38,27 @@ df1["Address"] = df1["Address"].fillna("نامشخص")
 address_counts = df1["Address"].value_counts()
 df1["AddressFrequency"] = df1["Address"].map(address_counts)
 
-print(df1["Address"].unique())
-print(df1.head(10).to_string())
+# print(df1["Address"].unique())
+# print(df1.head(10).to_string())
 from sklearn.preprocessing import LabelEncoder,StandardScaler
 le = LabelEncoder()
 df1["Address_Encode"] = le.fit_transform(df1["Address"])
-print(df1.columns)
-print(df1.head(10).to_string())
+# print(df1.columns)
+# print(df1.head(10).to_string())
 
-sns.heatmap(df1['Elevator','Floor','Area','Parking','Room','Warehouse','YearOfConstruction','Address_Encode'],)
+# sns.heatmap(df1['Elevator','Floor','Area','Parking','Room','Warehouse','YearOfConstruction','Address_Encode'],)
+# plt.show()
+sns.heatmap(df1[['Elevator','Floor','Area','Parking','Room','Warehouse','YearOfConstruction','Address_Encode',"Price"]].corr())
 plt.show()
-
+print(df1.isnull().sum())
 # x = df1.drop(["Price"], axis=1)
 X = df1[['Elevator','Floor','Area','Parking','Room','Warehouse','YearOfConstruction','Address_Encode']]
 Y = df1["Price"]
 
 ss = StandardScaler()
 X_rescale = ss.fit_transform(X)
-print(X_rescale)
+# print(X_rescale)
+
 
 X_train , X_test , Y_train , Y_test = train_test_split(X_rescale,Y , test_size=0.2 , random_state=0,shuffle=True)
 
@@ -78,5 +82,5 @@ R2S = r2_score(Y_test,y_pred)
 # joblib.dump(lr, "model.pkl")
 # joblib.dump(ss, "scaler.pkl")
 # joblib.dump("model.pkl")
-
+#
 # print("Model and scaler saved successfully")
