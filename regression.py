@@ -48,9 +48,18 @@ df1["Address_Encode"] = le.fit_transform(df1["Address"])
 
 # sns.heatmap(df1['Elevator','Floor','Area','Parking','Room','Warehouse','YearOfConstruction','Address_Encode'],)
 # plt.show()
-sns.heatmap(df1[['Elevator','Floor','Area','Parking','Room','Warehouse','YearOfConstruction','Address_Encode',"Price"]].corr())
-plt.show()
-print(df1.isnull().sum())
+# sns.heatmap(df1[['Elevator','Floor','Area','Parking','Room','Warehouse','YearOfConstruction','Address_Encode',"Price"]].corr())
+# plt.show()
+# print(df1.isnull().sum())
+
+q1=df1['Price'].quantile(0.25)
+q3=df1['Price'].quantile(0.75)
+
+IQR=q3-q1
+lower_bound=q1-1.5*IQR
+upper_bound=q3+1.5*IQR
+
+
 # x = df1.drop(["Price"], axis=1)
 X = df1[['Elevator','Floor','Area','Parking','Room','Warehouse','YearOfConstruction','Address_Encode']]
 Y = df1["Price"]
