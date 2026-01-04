@@ -7,7 +7,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 import joblib
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 import seaborn as sns
 
 data = pd.read_csv('HouseNew.csv')
@@ -63,8 +63,8 @@ upper_bound=q3+1.5*IQR
 
 df1=df1[(df1['Price']>=lower_bound ) & (df1['Price']<= upper_bound)]
 sns.boxplot(data=df1,x='Price')
-plt.show()
-print(df1.dtypes)
+# plt.show()
+# print(df1.dtypes)
 
 # x = df1.drop(["Price"], axis=1)
 X = df1[['Elevator','Floor','Area','Parking','Room','Warehouse','YearOfConstruction','Address_Encode']]
@@ -74,8 +74,14 @@ ss = StandardScaler()
 X_rescale = ss.fit_transform(X)
 # print(X_rescale)
 
+mms=MinMaxScaler()
+X_rescale_mms=mms.fit_transform(X)
 
-X_train , X_test , Y_train , Y_test = train_test_split(X_rescale,Y , test_size=0.2 , random_state=0,shuffle=True)
+
+# X_train , X_test , Y_train , Y_test = train_test_split(X_rescale,Y , test_size=0.3, random_state=0,shuffle=True)
+
+
+X_train , X_test , Y_train , Y_test = train_test_split(X_rescale_mms,Y , test_size=0.3, random_state=0,shuffle=True)
 
 lr =LinearRegression()
 lr.fit(X_train,Y_train)
@@ -88,10 +94,10 @@ MSE = mean_squared_error(Y_test,y_pred)
 RMSE = np.sqrt(MSE)
 R2S = r2_score(Y_test,y_pred)
 
-# print(MAE)
-# print(MSE)
-# print(RMSE)
-# print(r2_score)
+print(MAE)
+print(MSE)
+print(RMSE)
+print(R2S)
 
 
 # joblib.dump(lr, "model.pkl")
