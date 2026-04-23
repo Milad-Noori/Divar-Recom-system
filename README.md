@@ -30,31 +30,20 @@ Built with Python and Scikit-learn.
 git clone https://github.com/Milad-Noori/Divar-Recom-system.git
 cd YOUR_REPO
 
-
-###############
 ```
 
-
-
-## link : Run Locally
-
+## Run Locally
 ```bash
-  
-
 pip install -r requirements.txt
 python main.py
-
 ```
 
-
-
-
-
+## Author
 ```bash
  Author
 	•	Milad-Noori
 	•	GitHub: https://github.com/Milad-Noori
-
+```
 
 
 
