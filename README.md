@@ -31,15 +31,23 @@ git clone https://github.com/Milad-Noori/Divar-Recom-system.git
 cd YOUR_REPO
 
 
+###############
+```
 
+
+
+``` Run Locally 
 
 pip install -r requirements.txt
 python main.py
 
+```
 
 
 
-:computer: Author
+
+
+``` Author
 	•	YOUR NAME
 	•	GitHub: https://github.com/Milad-Noori
 
