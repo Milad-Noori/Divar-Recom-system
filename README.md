@@ -36,7 +36,10 @@ cd YOUR_REPO
 
 
 
-``` Run Locally 
+## link : Run Locally
+
+```bash
+  
 
 pip install -r requirements.txt
 python main.py
@@ -47,8 +50,9 @@ python main.py
 
 
 
-``` Author
-	•	YOUR NAME
+```bash
+ Author
+	•	Milad-Noori
 	•	GitHub: https://github.com/Milad-Noori
 
 
